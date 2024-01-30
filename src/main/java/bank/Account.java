@@ -49,7 +49,16 @@ setBalance(newBalance);
 DataSource.updateAccoutBalance(id, newBalance);
 }
 }
-public void withdraw(double withdraw){
-
+public void withdraw(double amount) throws AmountException{
+if(amount < 0){
+  throw new AmountException("Sorry you can't withdraw a negative amount");
+}else if(amount < getBalance()){
+  throw new AmountException("You do not have sufficient funds!");
+}
+else {
+  double newBalance = balance - amount;
+  setBalance(newBalance);
+  DataSource.updateAccoutBalance(id, newBalance);
+}
 }
 }

@@ -73,7 +73,12 @@ while(selection !=4 && customer.isAuthenticated()){
     case 2:
     System.out.println("How much money will you like to withdraw?");
     amount = scanner.nextDouble();
-    account.withdraw(amount);
+    try{
+      account.withdraw(amount);}
+      catch(AmountException e){
+        System.out.println(e.getMessage());
+        System.out.println("Plese try again");
+      }
     break;
     case 3:
     System.out.println("Your balance is " + account.getBalance());
