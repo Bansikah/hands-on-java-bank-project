@@ -46,6 +46,7 @@ if( amount < 1){
 else{
 double newBalance = balance + amount;
 setBalance(newBalance);
+DataSource.updateAccoutBalance(id, newBalance);
 }
 }
 public void withdraw(double withdraw){
