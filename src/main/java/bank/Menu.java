@@ -18,7 +18,7 @@ public class Menu {
 
     if(customer != null){
       Account account = DataSource.getAccount(customer.getAccountId());
-      menu.showMenu(account, customer);
+      menu.showMenu(customer, account);
     }
 
     menu.scanner.close();
@@ -39,8 +39,49 @@ public class Menu {
     }
     return customer;
     }
+/**
+ * @param customer
+ * @param account
+ */
 private void showMenu(Customer customer, Account account){
-  
+int selection = 0;
+
+while(selection !=4 && customer.isAuthenticated()){
+  System.out.println("============================================");
+  System.out.println("Please select one of the following options");
+  System.out.println("1.Deposit");
+  System.out.println("2.Withdraw");
+  System.out.println("3.Check balance");
+  System.out.println("4.Logout");
+  System.out.println("============================================");
+  selection = scanner.nextInt();
+
+  double amount = 0;
+  switch(selection){
+    case 1:
+    System.out.println("How much money will you like to deposit?");
+    amount = scanner.nextDouble();
+    account.deposit(amount);
+    break;
+    case 2:
+    System.out.println("How much money will you like to withdraw?");
+    amount = scanner.nextDouble();
+    account.withdraw(amount);
+    break;
+    case 3:
+    System.out.println("Your balance is " + account.getBalance());
+    break;
+    case 4:
+    Authenticator.logout(customer);
+    break;
+    default:
+    System.out.println("Thanks for banking at Globe Bank International!");
+    break;
+    // default:
+    // System.out.println("Sorry this is an Invalid option, Please try again");
+    // break;
+  }
+}
 }
   }
 
